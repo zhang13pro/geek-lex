@@ -1,19 +1,32 @@
 <template>
   <div :style="fontStyle">
-    {{ rate }}
+    <slot></slot>
+    <div class="rate" @mouseout="mouseOut">
+      <span @mouseover="mouseOver(num)" v-for="num in 5" :key="num">☆</span>
+      <span class="hollow" :style="fontWidth">
+        <span
+          @click="onRate(num)"
+          @mouseover="mouseOver(num)"
+          v-for="num in 5"
+          :key="num"
+          >★</span
+        >
+      </span>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
+// 定义数据格式
 let props = defineProps({
-  value: Number,
-  theme: { type: String, default: "orange" },
+  modelValue: Number,
+  theme: { type: String, default: "yellow" },
 });
-let rate = computed(() =>
-  "★★★★★☆☆☆☆☆".slice(5 - props.value, 10 - props.value)
-);
+// 定义监听函数
+let emits = defineEmits(["update:modelValue"]);
+let width = ref(props.modelValue);
 const themeObj = {
   black: "#00",
   white: "#fff",
@@ -26,4 +39,30 @@ const themeObj = {
 const fontStyle = computed(() => {
   return `color:${themeObj[props.theme]};`;
 });
+const fontWidth = computed(() => `width:${width.value}em;`);
+
+function onRate(num) {
+  emits("update:modelValue", num);
+}
+function mouseOver(i) {
+  width.value = i;
+}
+function mouseOut() {
+  width.value = props.modelValue;
+}
 </script>
+
+<style scoped>
+.rate {
+  position: relative;
+  display: inline-block;
+}
+.rate > span.hollow {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+}
+</style>

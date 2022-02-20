@@ -1,10 +1,12 @@
 <template>
   <h1 @click="toggle">全屏</h1>
-  <Rate value="1" theme="yellow" />
+  <Count />
 </template>
+
 <script setup>
-import Rate from "../components/Rate.vue";
+import Count from "../components/Count.vue";
 import { useFullscreen } from "@vueuse/core";
+import { ref } from "vue";
 
 const { isFullscreen, enter, exit, toggle } = useFullscreen();
 </script>

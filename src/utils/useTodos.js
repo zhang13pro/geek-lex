@@ -1,11 +1,17 @@
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 import useStorage from "../utils/useStorage";
 
 export default function useTodos() {
   let title = ref("");
-  let todos = useStorage("todos", []);
+  let showModal = ref(false);
+  let todos = useStorage("todos", "[]");
 
   function addTodo() {
+    if (!title.value) {
+      showModal.value = true;
+      setTimeout(() => (showModal.value = false), 1500);
+      return;
+    }
     todos.value.push({
       title: title.value,
       done: false,
@@ -30,5 +36,43 @@ export default function useTodos() {
     },
   });
 
-  return { title, todos, addTodo, clear, active, all, allDone };
+  // JS动画
+  let animate = reactive({ show: false, el: null });
+  function beforeEnter(el) {
+    let dom = animate.el;
+    let rect = dom.getBoundingClientRect();
+    let x = window.innerWidth - rect.left - 60;
+    let y = rect.top - 10;
+    el.style.transform = `translate(-${x}px, ${y}px)`;
+  }
+  function enter(el, done) {
+    document.body.offsetHeight;
+    el.style.transform = `translate(0,0)`;
+    el.addEventListener("transitionend", done);
+  }
+  function afterEnter(el) {
+    animate.show = false;
+    el.style.display = "none";
+  }
+  function removeTodo(e, i) {
+    animate.el = e.target;
+    animate.show = true;
+    todos.value.splice(i, 1);
+  }
+
+  return {
+    title,
+    todos,
+    addTodo,
+    clear,
+    active,
+    all,
+    allDone,
+    showModal,
+    removeTodo,
+    beforeEnter,
+    afterEnter,
+    enter,
+    animate,
+  };
 }
