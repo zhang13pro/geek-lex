@@ -8,7 +8,7 @@
 
 ## 项目架构
 
-![项目架构](/jiagou.png)
+![项目架构](/public/jiagou.png)
 
 ## 项目难点
 
@@ -25,3 +25,4 @@
 1. Template 和 JSX 的选择
 1. TypeScript 接口设计
 1. 基础库的封装
+1. 权限系统的设计与实现
