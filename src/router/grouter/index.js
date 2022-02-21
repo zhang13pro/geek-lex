@@ -21,6 +21,7 @@ function createWebHashHistory() {
     window.addEventListener("hashchange", fn);
   }
   // 返回hash 模式当前 URL（#后的就是hash值） 和监听 hashchange 事件的方法
+  // history模式 可以使用 location.pathname.slice(1,-1)
   return {
     bindEvents,
     url: window.location.hash.slice(1) || "/",
