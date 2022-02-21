@@ -7,10 +7,11 @@
 import { computed } from "vue";
 import { useRouter } from "../grouter/index";
 
+// 依赖注入 获取Router实例
 let router = useRouter();
-// 在用户路由配置 route 中计算出匹配的组件
 const comp = computed(() => {
   const route = router.routes.find(
+    // 用户路由配置 route 是否匹配当前组件URL
     (route) => route.path === router.current.value
   );
   return route ? route.component : null;
