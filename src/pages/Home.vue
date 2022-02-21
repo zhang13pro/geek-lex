@@ -1,7 +1,9 @@
 <script setup>
 import TodoList from "../components/TodoList.vue";
+import Heading from "../components/Head.jsx";
 </script>
 
 <template>
-  <h1>这是首页</h1>
+  <Heading :level="3">hello jsx-in-vue</Heading>
+  <TodoList />
 </template>

@@ -55,9 +55,23 @@ let {
 } = useTodos();
 </script>
 
-<style scoped>
-li {
-  list-style: none;
+<style scoped lang="scss">
+$padding: 10px;
+$white: #fff;
+ul {
+  width: 500px;
+  margin: 0 auto;
+  padding: 0;
+  li {
+    &:hover {
+      cursor: pointer;
+    }
+    list-style-type: none;
+    margin-bottom: $padding;
+    padding: $padding;
+    background: $white;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+  }
 }
 .done {
   color: gray;

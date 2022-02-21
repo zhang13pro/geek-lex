@@ -1,5 +1,6 @@
-import { createRouter, createWebHashHistory } from "./grouter/index";
-// import { createRouter, createWebHashHistory } from "vue-router";
+// node_modules/vue-router/dist/vue-router.d.ts 查看vue-router类型定义
+import { createRouter, createWebHashHistory } from "vue-router";
+// import { createRouter, createWebHashHistory } from "./grouter/index";
 import Home from "../pages/home.vue";
 import About from "../pages/about.vue";
 

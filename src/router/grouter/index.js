@@ -1,7 +1,7 @@
 // 为了实现单页应用，前端路由的需求也变得重要了起来。
-// 前端控制路由的实现原理  改变 URL 的情况下，保证页面的不刷新。
+// 前端控制路由的实现原理  改变 URL 的情况下，保证页面的不刷新。分为 hash-router 和 history
 // hash模式原理👉 hash 值的变化并不会导致浏览器页面的刷新，只是会触发 hashchange 事件
-// history模式👉 HTML5新增API：pushState 和 replaceState可以在改变URL时不发送请求
+// history模式👉 HTML5新增API：pushState 和 replaceState可以在改变URL时不发送请求，触发 popstate 事件
 
 import { ref, inject } from "vue";
 import RouterLink from "./RouterLink.vue";
